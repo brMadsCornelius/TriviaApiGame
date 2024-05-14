@@ -95,7 +95,7 @@ def create_app(test_config=None):
             'questions': current_questions,
             'totalQuestions': len(Question.query.all()),
             'categories': formatted_categories,
-            'currentCategory': 0 #how to get that? I am returning a list of questions with differnt categories??
+            'currentCategory': 0 # Which one should be current? I am returning a list of questions with differnt categories??
         })
 
 
@@ -144,8 +144,13 @@ def create_app(test_config=None):
         new_category = body.get('category', None)
         new_difficulty = body.get('difficulty', None)
 
+        # Ensuer that frontend send all required data
+        if new_question==None or new_answer==None or new_category==None or new_difficulty==None:
+            abort(422)
+
         try:
             question = Question(question=new_question,answer=new_answer,category=new_category,difficulty=new_difficulty)
+
             question.insert()
 
             return jsonify({
@@ -203,6 +208,9 @@ def create_app(test_config=None):
             # Get all questions
             selection = Question.query.filter_by(category=str(category_id)).all()
             current_questions = paginate_questions(request, selection) # paginate max 10 questions
+
+            if not current_questions:
+                abort(404)
 
             return jsonify({
                 'success': True,
