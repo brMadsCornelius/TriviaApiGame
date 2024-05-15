@@ -95,7 +95,7 @@ def create_app(test_config=None):
             'questions': current_questions,
             'totalQuestions': len(Question.query.all()),
             'categories': formatted_categories,
-            'currentCategory': 0 # Which one should be current? I am returning a list of questions with differnt categories??
+            'currentCategory': 1 # Which one should be current? I am returning a list of questions with differnt categories??
         })
 
 
