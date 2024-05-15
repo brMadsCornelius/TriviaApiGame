@@ -4,6 +4,10 @@ from flask_sqlalchemy import SQLAlchemy
 import json
 from settings import DATABASE_NAME, DATABASE_USERNAME, DATABASE_PASSWORD
 
+# setting up the environment variables so we dont have to write it in terminal every time
+os.environ["FLASK_APP"] = "flaskr"
+os.environ["FLASK_ENV"] = "development"
+
 database_path = f"postgresql://{DATABASE_USERNAME}:{DATABASE_PASSWORD}@localhost:5432/{DATABASE_NAME}"
 
 db = SQLAlchemy()
