@@ -84,7 +84,7 @@ class QuestionView extends Component {
 
   submitSearch = (searchTerm) => {
     $.ajax({
-      url: `/questions`, //TODO: update request URL
+      url: `/questions/search`, // Updated request URL to /questions/search because it otherwise share same url as getQuestions
       type: 'POST',
       dataType: 'json',
       contentType: 'application/json',
